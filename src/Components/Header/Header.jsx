@@ -11,11 +11,14 @@ class Header extends Component {
   }
 
   options = [
-    { language: "English", value: "English" },
-    { language: "Hindi", value: "Hindi" },
-    { language: "Turkish", value: "Turkish" },
-    { language: "Japanese", value: "Japanese" },
+    { language: "Select Options", value: "" },
+    { language: "English", value: "en" },
+    { language: "Hindi", value: "hi" },
+    { language: "Bengali", value: "bn" },
+    { language: "Turkish", value: "tr" },
+    { language: "Japanese", value: "ja" },
   ];
+
   render() {
     return (
       <div className="header-container" style={{ display: "flex" }}>
