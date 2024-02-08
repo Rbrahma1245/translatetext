@@ -1,41 +1,39 @@
 import { Component } from "react";
 import Header from "../Header/Header";
-import "../i18next";
 import { withTranslation } from "react-i18next";
 import Display from "../Display";
+import "../i18next";
 
 class Homepage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      language: "en",
-      text: "",
-    };
-  }
-
-  handleSelect = (selectedLanguage) => {
-    this.setState({ language: selectedLanguage.language });
-
-    // let loc = "http://localhost:5173/";
-    // window.location.replace(loc + "?lng=" + selectedLanguage.language);
+  state = {
+    language: "en",
   };
 
-  handleChange = (e) => {
-    this.setState({ text: e.target.value });
+  changeLanguage = (newLang) => {
+    const { i18n } = this.props;
+    this.setState({ language: newLang });
+    i18n.changeLanguage(newLang);
+    this.updateURL(newLang);
+  };
+
+  updateURL = (newLang) => {
+    const loc = "http://localhost:5173/";
+    window.history.replaceState({}, "", loc + "?lng=" + newLang);
+  };
+
+  handleSelect = (selectedLanguage) => {
+    this.changeLanguage(selectedLanguage.language);
   };
 
   render() {
-    const { t } = this.props;
     return (
       <>
         <Header addLanguage={this.handleSelect} />
-        <Display key={this.state.language}/>
-
-        {/* Use double curly braces for dynamic variables in t function */}
-        {/* <p key={this.state.language}>{t("text", { name: "how are you" })}</p> */}
+        <Display />
       </>
     );
   }
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default withTranslation()(Homepage);

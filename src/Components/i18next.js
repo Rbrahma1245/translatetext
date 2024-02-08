@@ -15,7 +15,6 @@ i18next
 
     ns: ["default"],
     defaultNS: "default",
-
     supportedLngs: ["en","hi","bn","tr","ja"],
     
     backend: {

@@ -5,11 +5,10 @@ class Display extends Component {
   render() {
     const { t } = this.props;
 
-    console.log(this.props);
     return (
-      <div key={this.props.language} >
-        <h1>{t("welcome")}</h1>
-        <label>{t("desc")}</label>
+      <div>
+        <h1>{t("desc")}</h1>
+        <label>{t("choose")}</label>
       </div>
     );
   }
