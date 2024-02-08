@@ -1,20 +1,28 @@
 import { Component } from "react";
 import Header from "../Header/Header";
+import { withTranslation } from "react-i18next";
 import Display from "../Display";
 import "../i18next";
 
 class Homepage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      language: "en",
-    };
-  }
+  state = {
+    language: "en",
+  };
+
+  changeLanguage = (newLang) => {
+    const { i18n } = this.props;
+    this.setState({ language: newLang });
+    i18n.changeLanguage(newLang);
+    this.updateURL(newLang);
+  };
+
+  updateURL = (newLang) => {
+    const loc = "http://localhost:5173/";
+    window.history.replaceState({}, "", loc + "?lng=" + newLang);
+  };
 
   handleSelect = (selectedLanguage) => {
-    this.setState({ language: selectedLanguage.language });
-    let loc = "http://localhost:5173/";
-    window.location.replace(loc + "?lng=" + selectedLanguage.language);
+    this.changeLanguage(selectedLanguage.language);
   };
 
   render() {
@@ -28,4 +36,4 @@ class Homepage extends Component {
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export default Homepage;
+export default withTranslation()(Homepage);

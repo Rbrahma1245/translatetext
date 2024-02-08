@@ -11,7 +11,7 @@ class Header extends Component {
   }
 
   options = [
-    { language: "Select Options", value: "" },
+    { language: "Select Lang", value: "" },
     { language: "English", value: "en" },
     { language: "Hindi", value: "hi" },
     { language: "Bengali", value: "bn" },
