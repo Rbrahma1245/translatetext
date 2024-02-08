@@ -1,37 +1,26 @@
-import i18n from "i18next";
+import i18next from "i18next";
+import HttpBackend from "i18next-http-backend";
+import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
-const resources = {
-  English: {
-    translation: {
-      text: { desc: "Hi how are you ?" },
-    },
-  },
-  Hindi: {
-    translation: {
-      text: { desc: "हैलो, क्या हाल हैं ?" },
-    },
-  },
+const apiKey = "WN9kavQ2EQRDMvfWhq_8tA";
+const loadPath = `https://api.i18nexus.com/project_resources/translations/{{lng}}/{{ns}}.json?api_key=${apiKey}`;
 
-  Turkish: {
-    translation: {
-      text: { desc: "Merhaba nasılsın ?" },
+i18next
+  .use(HttpBackend)
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    fallbackLng: "en",
+
+    ns: ["default"],
+    defaultNS: "default",
+
+    supportedLngs: ["en", "hi", "bn", "tr", "ja"],
+
+    backend: {
+      loadPath: loadPath,
     },
-  },
-  Japanese: {
-    translation: {
-      text: { desc: "こんにちは、元気ですか ？" },
-    },
-  },
-};
+  });
 
-i18n.use(initReactI18next).init({
-  resources,
-  lng: "English",
-
-  interpolation: {
-    escapeValue: false,
-  },
-});
-
-export default i18n;
+export default i18next;

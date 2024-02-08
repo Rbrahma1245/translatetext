@@ -1,43 +1,31 @@
 import { Component } from "react";
-import { withTranslation } from "react-i18next";
-import "../i18next";
 import Header from "../Header/Header";
+import Display from "../Display";
+import "../i18next";
 
 class Homepage extends Component {
   constructor() {
     super();
     this.state = {
-      language: "English",
+      language: "en",
     };
   }
 
   handleSelect = (selectedLanguage) => {
     this.setState({ language: selectedLanguage.language });
+    let loc = "http://localhost:5173/";
+    window.location.replace(loc + "?lng=" + selectedLanguage.language);
   };
-
-  changeLanguage = (lng) => {
-    const { i18n } = this.props;
-    i18n.changeLanguage(lng);
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.language !== this.state.language) {
-      this.changeLanguage(this.state.language);
-    }
-  }
 
   render() {
-    const { t } = this.props;
-
     return (
       <>
         <Header addLanguage={this.handleSelect} />
-
-        <h1>{t("text.desc")}</h1>
+        <Display />
       </>
     );
   }
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export default withTranslation()(Homepage);
+export default Homepage;
